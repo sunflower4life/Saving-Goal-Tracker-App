@@ -29,7 +29,13 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 10),
+              Text('Calculate Your Saving Goal' , 
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: const Color.fromARGB(255, 42, 76, 136),
+              ),),
+              SizedBox(height: 15),
               Row(
                 children: [
                   //User enter target amount
