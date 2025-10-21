@@ -9,6 +9,8 @@ class SGTCalcScreen extends StatefulWidget {
 
 class _SGTCalcScreenState extends State<SGTCalcScreen> {
 
+  String typeSaving = 'Weekly';//for dropdown of type saving(weekly/daily)
+
   TextEditingController targetAmountController = TextEditingController();
   TextEditingController savingPerWeekController = TextEditingController();
   TextEditingController startingAmountController = TextEditingController();
