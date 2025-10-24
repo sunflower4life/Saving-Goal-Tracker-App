@@ -20,14 +20,6 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
   double weeksNeeded =0;
   double monthsNeeded =0;
 
-  //store calc result
-  String errorMessage = '';
-
-  //untuk error message(border color)
-  bool isTargetValid = true;
-  bool isSavingValid = true;
-  bool isStartingValid = true;
-
   // FocusNode to set focus back to first field after reset
   FocusNode targetFocusNode = FocusNode();
   
@@ -58,42 +50,22 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: const Color.fromARGB(255, 42, 76, 136),
-                ),),
+                ),
+                ),
                 SizedBox(height: 25),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(width: 130, child: Text('Target Amount')),
+                    //User enter starting amount
+                    SizedBox(width: 130, child: Text('Target Amount')),//width 130 jarak antara kotak dengan title(text)
                     SizedBox(
                       width: 170,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextFormField(
-                            controller: targetAmountController,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              labelText: 'Enter Target (RM)',
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: isTargetValid ? Colors.grey : Colors.red,
-                                  width: 1.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                          if (!isTargetValid)
-                            const Padding(
-                              padding: EdgeInsets.only(top: 4.0, left: 4.0),
-                              child: Text(
-                                'Please enter a valid target amount',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                        ],
+                      child: TextField(
+                        controller: targetAmountController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter Target(RM)',
+                        ),
                       ),
                     ),
                   ],
@@ -106,46 +78,18 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                     SizedBox(width: 130, child: Text('Starting Amount')),//width 130 jarak antara kotak dengan title(text)
                     SizedBox(
                       width: 170,
-                      child: TextFormField(
+                      child: TextField(
                         controller: startingAmountController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: 'Enter Starting (RM)',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: isStartingValid ? Colors.grey : Colors.red,
-                              width: isTargetValid ? 1.0 : 2.0,
-                            ),
-                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter Starting(RM)',
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    //User enter amount saving/week
-                    SizedBox(width: 130, child: Text('Weekly Saving')), //width 130 jarak antara kotak dengan title(text)
-                    SizedBox(
-                      width: 170,
-                      child: TextFormField(
-                        controller: savingPerWeekController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Enter Saving (RM)',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: isSavingValid ? Colors.grey : Colors.red,
-                              width: isTargetValid ? 1.0 : 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height:10),
+                SizedBox(height: 5),
                 Row(
                   children: [
                     const SizedBox(width:130, child: Text('Type Saving')),
@@ -164,50 +108,25 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                     ),
                   ],
                 ),
-                //RED INLINE BOX
-                /*if (errorMessage.isNotEmpty)
-                  Container(
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      color: errorMessage.contains('Congratulations')
-                          ? Colors.green[50]
-                          : Colors.red[50],
-                      borderRadius: BorderRadius.circular(8.0),
-                      border: Border.all(
-                        color: errorMessage.contains('Congratulations')
-                            ? Colors.green
-                            : Colors.red,
-                        width: 1.5,
+                SizedBox(height:10),
+                Row(
+                  children: [
+                    //User enter amount saving/week
+                    SizedBox(width: 130, child: Text('Saving Amount')), //width 130 jarak antara kotak dengan title(text)
+                    SizedBox(
+                      width: 170,
+                      child: TextFormField(
+                        controller: savingPerWeekController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter Saving(RM)',
+                        ),
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          errorMessage.contains('Congratulations')
-                              ? Icons.check_circle
-                              : Icons.warning,
-                          color: errorMessage.contains('Congratulations')
-                              ? Colors.green
-                              : Colors.red,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            errorMessage,
-                            style: TextStyle(
-                              color: errorMessage.contains('Congratulations')
-                                  ? Colors.green
-                                  : Colors.red,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),*/
-                const SizedBox(height: 10),
+                  ],
+                ),
+                SizedBox(height: 10),
                 //Calculate and reset button
                 SizedBox(height:10),
                 Row(
@@ -302,90 +221,58 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
     double weekSaving = double.tryParse(savingPerWeekController.text) ?? 0;
     //String errorMessage = '';
 
-    isTargetValid = true;
-    isStartingValid = true;
-    isSavingValid = true;
-    errorMessage = '';
-
-    if (target <= 0) {
-      isTargetValid = false; // Highlight border in red
-      errorMessage = 'Please enter a valid target amount greater than 0';
-      setState(() {
-        weeksNeeded = 0;
-        monthsNeeded = 0;
-      });
-      return; // Stop execution if validation fails
-    }
-
-    // Validate starting amount (cannot be negative)
-    if (starting < 0) {
-      isStartingValid = false; // Highlight border in red
-      errorMessage = 'Starting balance cannot be negative';
-      setState(() {
-        weeksNeeded = 0;
-        monthsNeeded = 0;
-      });
-      return; // Stop execution if validation fails
-    }
-
-    // Validate weekly saving (must be > 0)
-    if (weekSaving <= 0) {
-      isSavingValid = false; // Highlight border in red
-      errorMessage = 'Please enter a valid weekly saving amount greater than 0';
-      setState(() {
-        weeksNeeded = 0;
-        monthsNeeded = 0;
-      });
-      return; // Stop execution if validation fails
-    }
-
-    // Check if goal is already reached
-    if (starting >= target) {
-      errorMessage = 'Congratulations! You have already reached your goal! 🎉';
-      setState(() {
-        weeksNeeded = 0;
-        monthsNeeded = 0;
-      });
-      return; // Stop execution if already at goal
-    }
-    //handle empty input
-    /*if(target.isNegative || starting.isNegative){
+    //Input validatin 1: Check if field empty for each text
+    if(target==0){
       SnackBar snackBar = const SnackBar(
-        content: Text('Please enter valid amount. Starting balance cannot be negative.')
+        content: Text('Please enter target amount.')
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      return;
-    }*/
-    //validate input and show error message
-    //target amount must be >0
-    /*if(target<=0){
+      //update ui =0
       setState(() {
-        errorMessage = 'Please enter valid target amount';
-        setState(){
-          weeksNeeded =0;
-          monthsNeeded=0;
-        }
-      });
-      return;
-    }
-    //starting cannot be <0
-    if(starting<0){
-      errorMessage = 'Starting balance cannot be negative';
-      setState((){
-        weeksNeeded =0;
+        weeksNeeded=0;
         monthsNeeded=0;
       });
       return;
-    }*/
-    //no need to save money if starting > target
-    if (starting >= target) {
-      errorMessage = 'Congratulations! You have already reached your goal! 🎉';
+    }
+    if(starting ==0){
+      SnackBar snackBar = const SnackBar(
+        content: Text('Please enter starting amount.')
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      //update ui =0
       setState(() {
-        weeksNeeded = 0;
-        monthsNeeded = 0;
+        weeksNeeded=0;
+        monthsNeeded=0;
       });
       return;
     }
+    if(weekSaving ==0){
+      SnackBar snackBar = const SnackBar(
+        content: Text('Please enter saving.')
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      //update ui =0
+      setState(() {
+        weeksNeeded=0;
+        monthsNeeded=0;
+      });
+      return;
+    }
+    
+    //Input validation 2: Check if value is -ve @ buat satu2
+    if(target.isNegative || starting.isNegative || weekSaving.isNegative){
+      SnackBar snackBar = const SnackBar(
+        content: Text('Please enter positive value.')
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      //update ui =0
+      setState(() {
+        weeksNeeded=0;
+        monthsNeeded=0;
+      });
+      return;
+    }
+
      //calculate amount to be saved
     double amountNeed = target - starting;
     //adjust saving/week base on type saving
