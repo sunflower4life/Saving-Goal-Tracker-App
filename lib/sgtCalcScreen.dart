@@ -73,7 +73,6 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                       ),
                     ],
                   ),
-
                   SizedBox(height: 10),
                   Row(
                     children: [
@@ -111,31 +110,28 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                     ],
                   ),
                   //Calculate and reset button
-                  SizedBox(height:10),
+                  SizedBox(height:20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SizedBox(width:10),
-                      ElevatedButton(
+                      //button for calculate Saving goal + icon calculate
+                      ElevatedButton.icon(
                         onPressed: calculateSGT, 
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(232, 240, 215, 161),
-                          foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        ),//call function
-                        child: Text('Calculate Saving Goal'), 
+                          backgroundColor: Color.fromARGB(232, 240, 215, 161),
+                          foregroundColor: Color.fromARGB(255, 99, 74, 38),
+                        ),
+                        //call function
+                        icon: Icon(Icons.calculate),
+                        label: Text('Calculate'),
                       ),
-                    ],
-                  ),
-                  SizedBox(height:10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
+                      //button for Reset + icon reset
+                      ElevatedButton.icon(
                         onPressed: () {
                           //clear all input
                           savingPerWeekController.clear();
                           targetAmountController.clear();
-                          startingAmountController.clear()
+                          startingAmountController.clear();
 
                           //set focus back to first field 
                           FocusScope.of(context).requestFocus(targetFocusNode);
@@ -148,10 +144,11 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                           setState((){});
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(232, 240, 215, 161),
-                          foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                          backgroundColor:Color.fromARGB(232, 240, 215, 161),
+                          foregroundColor:Color.fromARGB(255, 99, 74, 38),
                         ),
-                        child:Text('Reset'),
+                        icon: Icon(Icons.refresh),
+                        label:Text('Reset'),
                         
                       ),
                     ],
@@ -163,7 +160,6 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                     padding: EdgeInsets.all(16.0),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      border: Border.all(color: const Color.fromARGB(255, 114, 84, 19)),
                       borderRadius: BorderRadius.circular(20.0),
                       color: const Color.fromARGB(255, 240, 222, 168),
                     ),
@@ -174,7 +170,7 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 11, 11, 11),
+                            color: Color.fromARGB(255, 99, 74, 38),
                           ),
                         ),
                         SizedBox(height: 10),
@@ -209,7 +205,7 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
       // Show SnackBar for empty fields
       SnackBar snackBar = const SnackBar(
         content: Text('Please fill in all fields'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.red,
         duration: Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -226,7 +222,7 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
     if(target.isNegative || starting.isNegative || weekSaving.isNegative){
       SnackBar snackBar = const SnackBar(
         content: Text('Please enter positive value.'),
-        backgroundColor: Colors.red,
+        //backgroundColor: Colors.red,
         duration: Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -237,7 +233,6 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
       });
       return;
     }
-
      //calculate amount to be saved, how much money still needed
     double amountNeed = target - starting;
 
