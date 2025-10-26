@@ -119,11 +119,15 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                         onPressed: calculateSGT, 
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(232, 240, 215, 161),
-                          foregroundColor: Color.fromARGB(255, 99, 74, 38),
                         ),
                         //call function
-                        icon: Icon(Icons.calculate),
-                        label: Text('Calculate'),
+                        icon: Icon(Icons.calculate , color: Colors.black),
+                        label: Text('Calculate',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),),
                       ),
                       //button for Reset + icon reset
                       ElevatedButton.icon(
@@ -147,9 +151,13 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                           backgroundColor:Color.fromARGB(232, 240, 215, 161),
                           foregroundColor:Color.fromARGB(255, 99, 74, 38),
                         ),
-                        icon: Icon(Icons.refresh),
-                        label:Text('Reset'),
-                        
+                        icon: Icon(Icons.refresh , color: Colors.black),
+                        label:Text('Reset', 
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),),
                       ),
                     ],
                   ),
@@ -202,7 +210,7 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
 
     //Input validatin 1: Check if field empty for each text
     if (target == 0 || weekSaving == 0) {
-      // Show SnackBar for empty fields
+      // Show SnackBar(feedback message) for empty fields
       SnackBar snackBar = const SnackBar(
         content: Text('Please fill in all fields'),
         backgroundColor: Colors.red,
