@@ -213,7 +213,6 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
       // Show SnackBar(feedback message) for empty fields
       SnackBar snackBar = const SnackBar(
         content: Text('Please fill in all fields'),
-        backgroundColor: Colors.red,
         duration: Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -229,8 +228,7 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
     //Input validation 2: Check if value is -ve @ buat satu2
     if(target.isNegative || starting.isNegative || weekSaving.isNegative){
       SnackBar snackBar = const SnackBar(
-        content: Text('Please enter positive value.'),
-        //backgroundColor: Colors.red,
+        content: Text('Please enter positive value'),
         duration: Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
