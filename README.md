@@ -5,7 +5,7 @@ NAME: NURUL NADHIRAH BINTI DZULKEFLI
 MATRIC NO. : 301315
 
 1.App Overview
-The Saving Goal Tracker is a simple application that is use to calculate how long does it take to reach their saving goals. The calculation will be base on target amount, saving per week and starting balance where user can immediately see the number of weeks and days needed to reach their goals. Also, this app also perform a basic validation if user enter negative and empty input.
+The Saving Goal Tracker is a simple application that is use to calculate how long does it take to reach user saving goals. The calculation will be base on target amount, saving per week and starting balance where user can immediately see the number of weeks and days needed to reach user goals. Also, this app also perform a basic validation if user enter negative and empty input.
 
 2.Input
 -Target Amount (RM): 
@@ -46,7 +46,7 @@ The Saving Goal Tracker is a simple application that is use to calculate how lon
 -SizedBox
 -SingleChildScrollView
 -SnackBar
--CircularProgressIndicato
+-CircularProgressIndicator
 -Image.asset
 -FocusNode
 
@@ -58,14 +58,14 @@ The Saving Goal Tracker is a simple application that is use to calculate how lon
         //output/result set to 0
     }
 -Check validation 2: Check if value is -ve.
-    Using Show SnackBar(feedback message) for -ve value for all text fieldss
+    Using Show SnackBar(feedback message) for -ve value for all text fields
     if(target.isNegative || starting.isNegative || weekSaving.isNegative){
         //Show SnackBar message : 'Please enter positive value'
         //output/result set to 0
     }
 -Safe Parsing
     use double.tryParse(controller.text) ?? 0 to all input
-    To prevent crashes from non numeric value by defaulting to 0.
+    To prevent crashes from non numeric values by defaulting to 0.
 
 7.Screenshots
 -Splash

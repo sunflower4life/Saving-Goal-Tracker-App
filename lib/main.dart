@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState(){
     super.initState();
     Future.delayed(const Duration (seconds: 2),(){
-      Navigator.pushReplacement(
+      Navigator.pushReplacement( //navigate to the SGTCalcScreen
         context,
         MaterialPageRoute(builder: (context) => const SGTCalcScreen()), //navigate to home after navigator.pushreplacement
     );

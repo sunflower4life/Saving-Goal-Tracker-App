@@ -9,13 +9,13 @@ class SGTCalcScreen extends StatefulWidget {
 
 class _SGTCalcScreenState extends State<SGTCalcScreen> {
 
-  //untuk retrieve user input drp textfields
+  //controller untuk retrieve user input drp textfields
   TextEditingController targetAmountController = TextEditingController();
   TextEditingController savingPerWeekController = TextEditingController();
   TextEditingController startingAmountController = TextEditingController();
 
   //variable to store calc results, initially 0
-  int weeksNeeded =0;
+  int weeksNeeded = 0;
   int daysNeeded = 0;
 
   // FocusNode to set focus back to first field after reset
@@ -129,7 +129,7 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
                           color: Colors.black,
                         ),),
                       ),
-                      //button for Reset + icon reset
+                      //button to include for both icon and text
                       ElevatedButton.icon(
                         onPressed: () {
                           //clear all input
@@ -203,7 +203,7 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
     );
   }
   void calculateSGT(){
-    // Parse inputs using double.tryParse with ?? 0
+    // Parse inputs using double.tryParse with ?? 0. if parsing fail it default to zero
     double target = double.tryParse(targetAmountController.text)??0;
     double starting = double.tryParse(startingAmountController.text) ?? 0; 
     double weekSaving = double.tryParse(savingPerWeekController.text) ?? 0;
@@ -213,7 +213,6 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
       // Show SnackBar(feedback message) for empty fields
       SnackBar snackBar = const SnackBar(
         content: Text('Please fill in all fields'),
-        duration: Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
@@ -229,7 +228,6 @@ class _SGTCalcScreenState extends State<SGTCalcScreen> {
     if(target.isNegative || starting.isNegative || weekSaving.isNegative){
       SnackBar snackBar = const SnackBar(
         content: Text('Please enter positive value'),
-        duration: Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       //update ui, result set to 0
